@@ -17,10 +17,10 @@ st.title("📊 AQI Query Result Dashboard")
 # Connect to MySQL using env vars
 try:
     conn = mysql.connector.connect(
-        host=st.secrets["DB_HOST"],
-        user=st.secrets["DB_USER"],
-        password=st.secrets["DB_PASS"],
-        database=st.secrets["DB_NAME"]
+        host=st.secrets["MYSQL_HOST"],
+        user=st.secrets["MYSQL_USER"],
+        password=st.secrets["MYSQL_PASSWORD"],
+        database=st.secrets["MYSQL_DATABASE"]
     )
     cursor = conn.cursor()
     st.success("Connected to Our MY SQL Database")
@@ -318,6 +318,7 @@ st.altair_chart(trends_chart)
 # Footer
 st.markdown("---")
 st.caption("Developed by Harsh Choudhary | Data from internal metrics + Google Trends API")
+
 
 
 
