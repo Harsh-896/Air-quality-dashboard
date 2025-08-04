@@ -4,11 +4,11 @@ import mysql.connector
 import altair as alt
 import plotly.express as px
 from pytrends.request import TrendReq
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import os
 
 # Load environment variables from .env \
-load_dotenv()
+#load_dotenv()
 
 # Set page title
 st.set_page_config(page_title="Static SQL Viewer", layout="wide")
@@ -318,6 +318,7 @@ st.altair_chart(trends_chart)
 # Footer
 st.markdown("---")
 st.caption("Developed by Harsh Choudhary | Data from internal metrics + Google Trends API")
+
 
 
 
