@@ -15,16 +15,24 @@ st.set_page_config(page_title="Static SQL Viewer", layout="wide")
 st.title("📊 AQI Query Result Dashboard")
 
 # Connect to MySQL using env vars
+host = st.secrets.get("MYSQL_HOST", os.getenv("MYSQL_HOST"))
+user = st.secrets.get("MYSQL_USER", os.getenv("MYSQL_USER"))
+password = st.secrets.get("MYSQL_PASSWORD", os.getenv("MYSQL_PASSWORD"))
+database = st.secrets.get("MYSQL_DATABASE", os.getenv("MYSQL_DATABASE"))
+port = int(st.secrets.get("MYSQL_PORT", os.getenv("MYSQL_PORT", 3306)))
+
 try:
     conn = mysql.connector.connect(
-        host=st.secrets["MYSQL_HOST"],
-        user=st.secrets["MYSQL_USER"],
-        password=st.secrets["MYSQL_PASSWORD"],
-        database=st.secrets["MYSQL_DATABASE"]
+        host=host,
+        user=user,
+        password=password,
+        database=database,
+        port=port
     )
     cursor = conn.cursor()
-    st.success("Connected to Our MY SQL Database")
+    st.success("✅ Connected to MySQL Database")
 except Exception as e:
+    st.error(f"❌ Connection failed: {e}")
     st.stop()
     
 # Sidebar: Database Explorer
@@ -318,6 +326,7 @@ st.altair_chart(trends_chart)
 # Footer
 st.markdown("---")
 st.caption("Developed by Harsh Choudhary | Data from internal metrics + Google Trends API")
+
 
 
 
